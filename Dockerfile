@@ -15,8 +15,6 @@ RUN set -ex \
       # build dependency
       autoconf \
       automake \
-      automake \
-      autotools-dev \
       autotools-dev \
       bison \
       build-essential \
@@ -57,7 +55,7 @@ RUN set -ex \
       libxml2 \
       libxml2-dev \
       make \
-      osm2pgsql
+      osm2pgsql \
       pkg-config \
       postgresql-server-dev-$PG_MAJOR \
       protobuf-c-compiler \

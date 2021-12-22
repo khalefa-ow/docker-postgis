@@ -206,7 +206,7 @@ ENV POSTGIS_GIT_HASH 27f44ecf69ac576c95ff649b2fb23aa3e1cce5c1
     && su postgres -c 'pg_ctl -D /tempdb --mode=immediate stop' \
     && rm -rf /tempdb \
     && rm -rf /tmp/pgis_reg 
-    
+
 # clean
 #    && cd / \
 #    && rm -rf /usr/src/postgis \
@@ -239,6 +239,10 @@ ENV POSTGIS_GIT_HASH 27f44ecf69ac576c95ff649b2fb23aa3e1cce5c1
 #      xsltproc \
 #    && apt-get clean \
 #    && rm -rf /var/lib/apt/lists/*
+#    && rm -fr /usr/src/SFCGAL
+#  && rm -fr /usr/src/PROJ
+#   && rm -fr /usr/src/geos
+#    && rm -fr /usr/src/gdal
 
 #RUN  apt-get install -y  make cmake g++ libboost-dev libboost-system-dev \
 #  libboost-filesystem-dev libexpat1-dev zlib1g-dev \
@@ -258,4 +262,4 @@ COPY ./update-postgis.sh /usr/local/bin
 RUN cat /_pgis_full_version.txt
 
 
-RUN apt install -y osm2pgsql
+

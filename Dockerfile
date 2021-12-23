@@ -141,36 +141,6 @@ RUN set -ex \
     && make install \
     && cd / 
 
-
-# Minimal command line test.
-RUN set -ex \
-    && ldconfig \
-    && cs2cs \
-    && gdalinfo --version \
-    && geos-config --version \
-    && ogr2ogr --version \
-    && proj \
-    && sfcgal-config --version \
-    && pcre-config  --version
-
-#FROM postgres:14-bullseye
-
-
-
-COPY --from=builder /usr/local /usr/local
-
-
-
-# Minimal command line test.
-RUN set -ex \
-    && ldconfig \
-    && cs2cs \
-    && gdalinfo --version \
-    && geos-config --version \
-    && ogr2ogr --version \
-    && proj \
-    && sfcgal-config --version
-
 # install postgis
 ENV POSTGIS_VERSION master
 ENV POSTGIS_GIT_HASH 27f44ecf69ac576c95ff649b2fb23aa3e1cce5c1
@@ -204,6 +174,31 @@ ENV POSTGIS_GIT_HASH 27f44ecf69ac576c95ff649b2fb23aa3e1cce5c1
     && su postgres -c 'pg_ctl -D /tempdb --mode=immediate stop' \
     && rm -rf /tempdb \
     && rm -rf /tmp/pgis_reg 
+
+
+# Minimal command line test.
+RUN set -ex \
+    && ldconfig \
+    && cs2cs \
+    && gdalinfo --version \
+    && geos-config --version \
+    && ogr2ogr --version \
+    && proj \
+    && sfcgal-config --version \
+    && pcre-config  --version
+
+#FROM postgres:14-bullseye
+#COPY --from=builder /usr/local /usr/local
+
+# Minimal command line test.
+#RUN set -ex \
+#    && ldconfig \
+#    && cs2cs \
+#    && gdalinfo --version \
+#    && geos-config --version \
+#    && ogr2ogr --version \
+#    && proj \
+#    && sfcgal-config --version
 
 # clean
 #    && cd / \
@@ -257,7 +252,4 @@ ENV POSTGIS_GIT_HASH 27f44ecf69ac576c95ff649b2fb23aa3e1cce5c1
 RUN mkdir -p /docker-entrypoint-initdb.d
 COPY ./initdb-postgis.sh /docker-entrypoint-initdb.d/10_postgis.sh
 COPY ./update-postgis.sh /usr/local/bin
-RUN cat /_pgis_full_version.txt
-
-
-
+#RUN cat /_pgis_full_version.txt
